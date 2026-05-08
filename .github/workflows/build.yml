@@ -33,10 +33,20 @@ jobs:
             swig python3-dev \
             device-tree-compiler
 
-      - name: Show help
+      - name: Build image
+        env:
+          TERM: xterm
         run: |
           chmod +x build.sh
-          ./build.sh -h || true
+
+          sudo bash -c '
+          export FORCE_UNSAFE_CONFIGURE=1
+
+          yes "" | ./build.sh <<EOF
+          1
+          1
+          EOF
+                    '
 
 
       - name: Upload image
