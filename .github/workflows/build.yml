@@ -24,7 +24,7 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y \
-            git curl wget docker.io qemu-user-static
+            git curl wget qemu-user-static
 
       - name: Fix config
         run: |
