@@ -31,17 +31,17 @@ jobs:
           chmod +x build.sh
 
           ./build.sh \
-          BOARD=orangepi4pro
-          BOARD_NAME="Orange Pi 4 Pro"
-          BOARDFAMILY="sun60iw2"
-          BOOTCONFIG="sun60iw2p1_t736_defconfig"
-          BOOT_LOGO="desktop"
-          BOOT_FDT_FILE="allwinner/sun60i-a733-orangepi-4-pro.dtb"
-          MODULES="aic8800_fdrv aic8800_btlpm pvrsrvkm"
-          KERNEL_TARGET="current"
-          DISTRIB_TYPE_CURRENT="jammy"
-          DISTRIB_TYPE_LEGACY="jammy"
-          SKIP_BOOTSPLASH="yes"
+          BOARD=orangepi4pro\
+          BOARD_NAME="Orange Pi 4 Pro"\
+          BOARDFAMILY="sun60iw2"\
+          BOOTCONFIG="sun60iw2p1_t736_defconfig"\
+          BOOT_LOGO="desktop"\
+          BOOT_FDT_FILE="allwinner/sun60i-a733-orangepi-4-pro.dtb"\
+          MODULES="aic8800_fdrv aic8800_btlpm pvrsrvkm"\
+          KERNEL_TARGET="current"\
+          DISTRIB_TYPE_CURRENT="jammy"\
+          DISTRIB_TYPE_LEGACY="jammy"\
+          SKIP_BOOTSPLASH="yes"\
           REVISION="1.0.8"
 
 
