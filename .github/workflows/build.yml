@@ -1,0 +1,49 @@
+name: Build OrangePi4Pro
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Free disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /opt/ghc
+          docker system prune -af
+
+      - name: Install deps
+        run: |
+          sudo apt update
+
+          sudo apt install -y \
+            git curl wget \
+            build-essential \
+            gcc g++ make \
+            bc bison flex \
+            libssl-dev \
+            libncurses-dev \
+            qemu-user-static \
+            debootstrap \
+            swig python3-dev \
+            device-tree-compiler
+
+      - name: Build image
+        run: |
+          chmod +x build.sh
+
+          ./build.sh \
+            BOARD=orangepi-4pro \
+            BRANCH=current \
+            RELEASE=jammy
+
+      - name: Upload image
+        uses: actions/upload-artifact@v4
+        with:
+          name: orangepi4pro-image
+          path: output/images/*
