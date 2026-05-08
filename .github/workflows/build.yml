@@ -39,9 +39,13 @@ jobs:
             BRANCH=current \
             RELEASE=jammy
 
-
       - name: Upload images
         uses: actions/upload-artifact@v4
         with:
           name: orangepi-image
-          path: output/images/*
+          path: |
+            output/**
+            deploy/**
+            out/**
+            *.img
+            *.xz
