@@ -28,7 +28,7 @@ jobs:
 
       - name: Build image
         run: |
-          chmod +x compile.sh
+          chmod +x build.sh
 
           ./compile.sh \
           BOARD_NAME="Orange Pi 4 Pro"
