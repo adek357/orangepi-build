@@ -1,11 +1,14 @@
-name: Build OrangePi4Pro
+name: Build OrangePi Image
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-22.04
 
     steps:
       - name: Checkout
@@ -20,37 +23,29 @@ jobs:
       - name: Install deps
         run: |
           sudo apt update
-
           sudo apt install -y \
-            git curl wget \
-            build-essential \
-            gcc g++ make \
-            bc bison flex \
-            libssl-dev \
-            libncurses-dev \
-            qemu-user-static \
-            debootstrap \
-            swig python3-dev \
-            device-tree-compiler
+            git curl wget docker.io qemu-user-static
 
       - name: Build image
-        env:
-          TERM: xterm
         run: |
-          chmod +x build.sh
+          chmod +x compile.sh
 
-          sudo bash -c '
-          export FORCE_UNSAFE_CONFIGURE=1
+          ./compile.sh \
+          BOARD_NAME="Orange Pi 4 Pro"
+          BOARDFAMILY="sun60iw2"
+          BOOTCONFIG="sun60iw2p1_t736_defconfig"
+          BOOT_LOGO="desktop"
+          BOOT_FDT_FILE="allwinner/sun60i-a733-orangepi-4-pro.dtb"
+          MODULES="aic8800_fdrv aic8800_btlpm pvrsrvkm"
+          KERNEL_TARGET="current"
+          DISTRIB_TYPE_CURRENT="jammy"
+          DISTRIB_TYPE_LEGACY="jammy"
+          SKIP_BOOTSPLASH="yes"
+          REVISION="1.0.8"
 
-          yes "" | ./build.sh <<EOF
-          1
-          1
-          EOF
-                    '
 
-
-      - name: Upload image
+      - name: Upload images
         uses: actions/upload-artifact@v4
         with:
-          name: orangepi4pro-image
+          name: orangepi-image
           path: output/images/*
