@@ -33,14 +33,11 @@ jobs:
             swig python3-dev \
             device-tree-compiler
 
-      - name: Build image
+      - name: Show help
         run: |
           chmod +x build.sh
+          ./build.sh -h || true
 
-          ./build.sh \
-            BOARD=orangepi-4pro \
-            BRANCH=current \
-            RELEASE=jammy
 
       - name: Upload image
         uses: actions/upload-artifact@v4
