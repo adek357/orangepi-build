@@ -30,7 +30,7 @@ jobs:
         run: |
           chmod +x build.sh
 
-          ./compile.sh \
+          ./build.sh \
           BOARD=orangepi4pro
           BOARD_NAME="Orange Pi 4 Pro"
           BOARDFAMILY="sun60iw2"
